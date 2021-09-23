@@ -13,4 +13,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.18" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FinalAssignment.DAL\FinalAssignment.DAL.csproj" />
+    <ProjectReference Include="..\FinalAssignment.Services\FinalAssignment.Services.csproj" />
+  </ItemGroup>
+
 </Project>
