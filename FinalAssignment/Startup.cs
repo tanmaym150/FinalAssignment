@@ -1,4 +1,5 @@
 using FinalAssignment.Data;
+using FinalAssignment.Services.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,8 +31,15 @@ namespace FinalAssignment
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<AssetDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddSingleton<IAssetService, AssetService>();
+            services.AddSingleton<IFacilityService, FacilityService>();
+            services.AddSingleton<IProductService, ProductService>();
             services.AddControllersWithViews();
             services.AddRazorPages();
         }

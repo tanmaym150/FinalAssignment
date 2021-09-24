@@ -8,8 +8,14 @@ namespace FinalAssignment.DAL.Data.Model
 {
     public class Facility
     {
+        public Facility()
+        {
+            Assets = new HashSet<Asset>();
+        }
+        [Key]
         public int Id { get; set; }
         [Required]
+        [Display(Name = "Facility Type")]
         public string FacilityType { get; set; }
         [InverseProperty("Facility")]
         public virtual ICollection<Asset> Assets { get; set; }

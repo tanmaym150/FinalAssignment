@@ -20,24 +20,31 @@ namespace FinalAssignment.DAL.Data.Model
         public int FacilityId { get; set; }
 
         public string  Location { get; set; }
-
-        public int AssetNo { get; set; }
-        public int ModelNo { get; set; }
-        public int SerialNo { get; set; }
+        [Display(Name = "Asset Number")]
+        public string AssetNo { get; set; }
+        [Display(Name = "Model Number")]
+        public string ModelNo { get; set; }
+        [Display(Name = "Serial Number")]
+        public string SerialNo { get; set; }
+        [Display(Name = "Purchase Date")]
         public DateTime PurchaseDate { get; set; }
+        [Display(Name = "Purchase price")]
         public int PurchasePrice { get; set; }
+        [Display(Name="EST Service Life (Years)")]
         public int EstServiceLife { get; set; }
+        [Display(Name = "BER Maintainance Cost")]
         public int BER_Maintainance_Cost { get; set; }
-        public int MyProperty { get; set; }
+       
         public bool Warranty { get; set; }
+        [Display(Name = "Expiry Date")]
         public DateTime? ExpiryDate { get; set; }
 
         [ForeignKey(nameof(ProductId))]
-        [InverseProperty("Asset")]
+        [InverseProperty("Assets")]
         public virtual Product Product { get; set; }
 
         [ForeignKey(nameof(FacilityId))]
-        [InverseProperty("Asset")]
+        [InverseProperty("Assets")]
         public virtual Facility Facility { get; set; }
         
     }
