@@ -24,11 +24,28 @@ namespace FinalAssignment.Controllers
         }
 
         // GET: Assets
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string SearchQuery,int PageNumber=1)
         {
+            var assets = new List<Asset>();
+            if (SearchQuery == null)
+            {
+                assets = await _assetService.GetAllAssets();
+            }
+            else
+            {
+                ViewData["SearchQuery"] = SearchQuery;
+                SearchQuery = SearchQuery.ToLower();
+                var result = await _assetService.GetAllAssets();
+
+                assets = result.Where(a => a.Name.ToLower().Contains(SearchQuery) || a.ModelNo.ToLower().Contains(SearchQuery)).ToList();
+
+            }
             //var assetDbContext = _context.Assets.Include(a => a.Facility).Include(a => a.Product);
             //return View(await assetDbContext.ToListAsync());
-            return View(await _assetService.GetAllAssets());
+            ViewBag.TotalPages = Math.Ceiling(assets.Count() / 3.0);
+            assets = assets.Skip((PageNumber - 1) * 3).Take(3).ToList();
+
+            return View(assets.OrderBy(m=>m.Name));
         }
 
         // GET: Assets/Details/5
@@ -69,6 +86,11 @@ namespace FinalAssignment.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (asset.Warranty)
+                {
+                    asset.ExpiryDate = asset.PurchaseDate.AddMonths(6);
+                }
+
                 bool result = await _assetService.CreateAsset(asset);
                 //_context.Add(asset);
                 //await _context.SaveChangesAsync();
@@ -117,8 +139,13 @@ namespace FinalAssignment.Controllers
 
             if (ModelState.IsValid)
             {
+
                 try
                 {
+                    if (asset.Warranty)
+                    {
+                        asset.ExpiryDate = asset.PurchaseDate.AddMonths(6);
+                    }
                     //_context.Update(asset);
                     //await _context.SaveChangesAsync();
                     await _assetService.UpdateAsset(asset);

@@ -5,6 +5,15 @@
 }
 
 <h1 style="text-align:center;">Index</h1>
+<div class="container-fluid">
+    <div class="row justify-content-center align-items-center">
+        <form style="text-align:center" asp-controller="Assets" asp-action="Index" method="get" class="d-flex">
+            <input class="form-control w-75" value="@ViewData["SeaechQuery"]" name="SearchQuery" type="search" placeholder="Search for Tool" aria-label="Search" />
+            <button class="btn btn-outline-success mx-2" type="submit">Search</button>
+
+        </form>
+    </div>
+</div>
 
 <p>
     <a asp-action="Create" style="text-align:center;">Create New</a>
@@ -111,3 +120,22 @@
 }
     </tbody>
 </table>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    @{
+                        double totalPages = ViewBag.TotalPages;
+
+                        for (int i = 1; i <= totalPages; i++)
+                        {
+                            <li class="page-item">@Html.ActionLink(i.ToString(), "Index", new { SearchQuery = "", PageNumber = i }, new { @class = "page-link" })</li>
+                        }
+                    }
+                </ul>
+            </nav>
+        </div>
+
+    </div>
+</div>

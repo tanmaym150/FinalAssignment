@@ -39,6 +39,8 @@ namespace FinalAssignment.DAL.Data.Model
         [Display(Name = "Expiry Date")]
         public DateTime? ExpiryDate { get; set; }
 
+        
+
         [ForeignKey(nameof(ProductId))]
         [InverseProperty("Assets")]
         public virtual Product Product { get; set; }
