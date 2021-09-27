@@ -10,28 +10,40 @@ namespace FinalAssignment.DAL.Data.Model
     {
         [Key]
         public int AssetId { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string  Description { get; set; }
-
+        [Required]
         [Display(Name="Product Type")]
         public int ProductId { get; set; }
+        [Required]
 
         [Display(Name="Facility")]
         public int FacilityId { get; set; }
-
+        [Required]
         public string  Location { get; set; }
+        [Required]
         [Display(Name = "Asset Number")]
+        
         public string AssetNo { get; set; }
+        [Required]
         [Display(Name = "Model Number")]
+       
         public string ModelNo { get; set; }
+        [Required]
         [Display(Name = "Serial Number")]
         public string SerialNo { get; set; }
+        [Required]
         [Display(Name = "Purchase Date")]
         public DateTime PurchaseDate { get; set; }
+        [Required]
         [Display(Name = "Purchase price")]
         public int PurchasePrice { get; set; }
+        [Required]
         [Display(Name="EST Service Life (Years)")]
         public int EstServiceLife { get; set; }
+        [Required]
         [Display(Name = "BER Maintainance Cost")]
         public int BER_Maintainance_Cost { get; set; }
        
