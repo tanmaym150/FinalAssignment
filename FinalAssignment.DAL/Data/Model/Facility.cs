@@ -11,6 +11,7 @@ namespace FinalAssignment.DAL.Data.Model
         public Facility()
         {
             Assets = new HashSet<Asset>();
+        
         }
         [Key]
         public int Id { get; set; }

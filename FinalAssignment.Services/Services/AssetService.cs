@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FinalAssignment.Services.ViewModel;
 
 namespace FinalAssignment.Services.Services
 {
@@ -17,6 +18,7 @@ namespace FinalAssignment.Services.Services
         public Task UpdateAsset(Asset asset);
         public Task DeleteAsset(int id);
         public bool AssetExist(int id);
+        public List<vmJoinAssetProduct> GetJoin();
 
     }
     public  class AssetService : IAssetService
@@ -70,6 +72,35 @@ namespace FinalAssignment.Services.Services
             using(var _context=new AssetDbContext())
             {
                 return await _context.Assets.Include(a => a.Product).Include(a => a.Facility).FirstOrDefaultAsync(m => m.AssetId == id);
+            }
+        }
+
+        public List<vmJoinAssetProduct> GetJoin()
+        {
+            using(var _context=new AssetDbContext())
+            {
+                try
+                {
+                    var joinData = from a in _context.Products
+                                   join p in _context.Assets
+                                   on a.Id equals p.ProductId
+                                   join f in _context.Facilities
+                                   on p.FacilityId equals f.Id
+                                   
+                                  
+
+                                   select new vmJoinAssetProduct
+                                   {
+                                       Name = p.Name,
+                                       ProductType = a.ProductType,
+                                       FacilityType=f.FacilityType
+                                   };
+                    return joinData.ToList();
+                }
+                catch(Exception)
+                {
+                    throw;
+                }
             }
         }
 

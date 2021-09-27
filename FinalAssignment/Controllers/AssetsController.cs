@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using FinalAssignment.DAL.Data.Model;
 using FinalAssignment.Data;
 using FinalAssignment.Services.Services;
+using FinalAssignment.Services.ViewModel;
 
 namespace FinalAssignment.Controllers
 {
@@ -26,6 +27,7 @@ namespace FinalAssignment.Controllers
         // GET: Assets
         public async Task<IActionResult> Index(string SearchQuery,int PageNumber=1)
         {
+            ViewData["joinInfo"] = _assetService.GetJoin();
             var assets = new List<Asset>();
             if (SearchQuery == null)
             {
