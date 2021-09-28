@@ -44,10 +44,12 @@ namespace FinalAssignment.Controllers
             }
             //var assetDbContext = _context.Assets.Include(a => a.Facility).Include(a => a.Product);
             //return View(await assetDbContext.ToListAsync());
+            var order = assets.OrderBy(m => m.Name);
             ViewBag.TotalPages = Math.Ceiling(assets.Count() / 3.0);
-            assets = assets.Skip((PageNumber - 1) * 3).Take(3).ToList();
+            assets = order.Skip((PageNumber - 1) * 3).Take(3).ToList();
 
-            return View(assets.OrderBy(m=>m.Name));
+            return View(assets);
+            
         }
 
         // GET: Assets/Details/5
