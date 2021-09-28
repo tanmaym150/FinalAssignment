@@ -32,7 +32,7 @@ namespace FinalAssignment.Data
         {
             if (!dbContextOptionsBuilder.IsConfigured)
             {
-                dbContextOptionsBuilder.UseSqlServer("Server=LAPTOP-PTL9D25U\\SQLEXPRESS;Database=aspnet-FinalAssignment-88D6E914-C60A-4493-93E6-909C834814F2;Trusted_Connection=True;MultipleActiveResultSets=true");
+                dbContextOptionsBuilder.UseSqlServer("Server=LAPTOP-PTL9D25U\\SQLEXPRESS;Database=aspnet-FinalAssignment-88D6E914-C60A-4493-93E6-909C834814F2;User Id=tanmay;Password=250830;");
             }
         }
     }
